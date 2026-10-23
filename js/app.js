@@ -1,18 +1,24 @@
 import { state, setData } from "./state.js";
 import { loadAllData } from "./dataService.js";
-import { getCustomerById, getEnrichedOrder, getStats } from "./selectors.js";
+import { getEnrichedOrder, getStats } from "./selectors.js";
+import { renderStats, renderOrders, renderError } from "./view.js";
+
+
+function render() {
+  renderStats(getStats(state));
+  const orders = state.orders.map(order => getEnrichedOrder(state, order));
+  renderOrders(orders);
+}
+
 
 async function init() {
   try {
     const data = await loadAllData();
     setData(data);
-
-   
-    console.log("Client 1 :", getCustomerById(state, 1));
-    console.log("Commande 101 :", getEnrichedOrder(state, state.orders[0]));
-    console.log("Stats :", getStats(state));
+    render();
   } catch (error) {
     console.error("Initialisation impossible :", error);
+    renderError(`Erreur de chargement des données : ${error.message}`);
   }
 }
 
