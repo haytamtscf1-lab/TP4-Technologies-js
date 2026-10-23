@@ -16,6 +16,7 @@ body {
   color: #1e293b;
 }
 
+
 .app-header {
   background: linear-gradient(135deg, var(--navy), var(--navy-dark));
   color: #fff;
@@ -36,6 +37,7 @@ body {
   margin-top: -45px;
 }
 
+
 .card {
   border: none;
   border-radius: 12px;
@@ -50,6 +52,7 @@ body {
   color: var(--navy);
   border-radius: 12px 12px 0 0 !important;
 }
+
 
 #stats .card {
   border-top: 5px solid var(--blue);
@@ -81,6 +84,7 @@ body {
   font-size: 1.8rem !important;
   font-weight: 700 !important;
 }
+
 
 .form-label {
   font-weight: 600;
@@ -161,6 +165,7 @@ body {
   color: #fff;
 }
 
+
 .modal-content {
   border: none;
   border-radius: 14px;
@@ -180,6 +185,7 @@ body {
   color: var(--navy);
   font-size: 1.05rem;
 }
+
 
 #error {
   border-radius: 10px;

@@ -61,6 +61,7 @@ export function renderSelectOptions(selectId, values, allLabel) {
     values.map(v => `<option value="${v}">${v}</option>`).join("");
 }
 
+
 export function renderOrderDetail(order) {
   document.getElementById("detail-title").textContent = `Commande #${order.id}`;
   document.getElementById("detail-body").innerHTML = `
