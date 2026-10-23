@@ -63,3 +63,33 @@ export function getStats(state) {
     totalAmount
   };
 }
+export function getFilteredOrders(state) {
+  const search = state.search.trim().toLowerCase();
+
+  return state.orders
+    .map(order => getEnrichedOrder(state, order))
+    .filter(order => {
+      const matchSearch = search === "" || order.customerName.toLowerCase().includes(search);
+      const matchStatus = state.selectedStatus === "" || order.status === state.selectedStatus;
+      const matchCategory = state.selectedCategory === "" || order.categories.includes(state.selectedCategory);
+      return matchSearch && matchStatus && matchCategory;
+    });
+}
+
+
+export function getCategories(state) {
+  const categories = [];
+  state.products.forEach(p => {
+    if (!categories.includes(p.category)) categories.push(p.category);
+  });
+  return categories;
+}
+
+
+export function getStatuses(state) {
+  const statuses = [];
+  state.orders.forEach(o => {
+    if (!statuses.includes(o.status)) statuses.push(o.status);
+  });
+  return statuses;
+}

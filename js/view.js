@@ -55,3 +55,34 @@ export function renderError(message) {
   box.classList.remove("d-none");
   document.getElementById("main-content").classList.add("d-none");
 }
+export function renderSelectOptions(selectId, values, allLabel) {
+  document.getElementById(selectId).innerHTML =
+    `<option value="">${allLabel}</option>` +
+    values.map(v => `<option value="${v}">${v}</option>`).join("");
+}
+
+export function renderOrderDetail(order) {
+  document.getElementById("detail-title").textContent = `Commande #${order.id}`;
+  document.getElementById("detail-body").innerHTML = `
+    <p class="mb-1"><strong>Client :</strong> ${order.customerName}</p>
+    <p class="mb-1"><strong>Ville :</strong> ${order.customerCity}</p>
+    <p class="mb-1"><strong>Date :</strong> ${order.date}</p>
+    <p class="mb-3"><strong>Statut :</strong> ${statusBadge(order.status)}</p>
+    <table class="table table-sm">
+      <thead>
+        <tr><th>Produit</th><th class="text-end">Prix</th><th class="text-end">Qté</th><th class="text-end">Montant</th></tr>
+      </thead>
+      <tbody>
+        ${order.lines.map(l => `
+          <tr>
+            <td>${l.name}</td>
+            <td class="text-end">${formatMAD(l.price)}</td>
+            <td class="text-end">${l.quantity}</td>
+            <td class="text-end">${formatMAD(l.amount)}</td>
+          </tr>`).join("")}
+      </tbody>
+      <tfoot>
+        <tr><th colspan="3">Total</th><th class="text-end">${formatMAD(order.total)}</th></tr>
+      </tfoot>
+    </table>`;
+}
